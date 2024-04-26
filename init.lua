@@ -553,6 +553,8 @@ require('lazy').setup({
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+      local tsdk = require('mason-registry').get_package('typescript-language-server'):get_install_path() .. '/node_modules/typescript/lib'
+      local vuePlugin = os.getenv 'HOME' .. '/node_modules/@vue/typescript_plugin'
       local servers = {
         -- clangd = {},
         -- gopls = {},
@@ -565,11 +567,30 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {},
-        volar = {
-          filetypes = { 'typescript', 'javascript', 'vue' },
+
+        tsserver = {
+          init_options = {
+            plugins = {
+              {
+                name = '@vue/typescript-plugin',
+                location = vuePlugin,
+                languages = { 'javascript', 'typescript', 'vue' },
+              },
+            },
+            tsserver = {
+              path = tsdk,
+            },
+          },
+          filetypes = {
+            'javascript',
+            'typescript',
+            'vue',
+          },
         },
-        -- eslint = {},
+        volar = {
+          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
+        },
+        eslint = {},
         --
 
         lua_ls = {
@@ -651,7 +672,9 @@ require('lazy').setup({
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        -- javascript = { { "prettierd", "prettier" } },
+        javascript = { 'eslint_d' },
+        typescript = { 'eslint_d' },
+        vue = { 'eslint_d' },
       },
     },
   },
