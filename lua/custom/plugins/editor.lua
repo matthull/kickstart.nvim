@@ -5,19 +5,23 @@ return {
     keys = {
       { 's', '<Plug>(leap)' },
       { 'S', '<Plug>(leap-from-window)' },
-      { 'o', 's', '<Plug>(leap-forward)' },
-      { 'o', 'S', '<Plug>(leap-backward)' },
     },
   },
 
   {
     'echasnovski/mini.pairs',
     event = 'VeryLazy',
+    config = function()
+      require('mini.pairs').setup()
+    end,
   },
 
   {
     'echasnovski/mini.surround',
     event = 'VeryLazy',
+    config = function()
+      require('mini.surround').setup()
+    end,
     opts = {
       mappings = {
         add = 'gsa',
