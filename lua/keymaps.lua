@@ -4,6 +4,7 @@
 vim.keymap.set('n', '<ESC>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('i', 'jk', '<C-c>')
 vim.keymap.set('n', ';', ':')
+vim.keymap.set('n', '<C-s>', vim.cmd.write)
 
 -- Buffer Management
 vim.keymap.set('n', '<leader>x', vim.cmd.bdelete, { desc = 'Close current buffer' })
