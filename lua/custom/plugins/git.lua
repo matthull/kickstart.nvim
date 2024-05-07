@@ -34,4 +34,14 @@ return {
       { '<leader>gg', '<cmd>LazyGit<cr>', { desc = 'Open LazyGit' } },
     },
   },
+
+  {
+    'FabijanZulj/blame.nvim',
+    config = function()
+      require('blame').setup()
+    end,
+    keys = {
+      { '<leader>gl', '<cmd>BlameToggle<CR>' },
+    },
+  },
 }
