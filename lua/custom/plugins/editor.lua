@@ -2,7 +2,6 @@ return {
   -- detect tabstop automatically
   { 'tpope/vim-sleuth' },
   -- gc to comment visual ranges
-  { 'numToStr/Comment.nvim' },
   {
     'ggandor/leap.nvim',
     event = 'VeryLazy',
